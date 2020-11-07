@@ -15,7 +15,7 @@ import java.sql.SQLException
 object Prefix {
 
     @Throws(SQLException::class)
-    fun getPrefix(guildID: String?, event: GuildMessageReceivedEvent): String? {
+    fun getPrefix(guildID: String): String? {
         var prefix = ""
 
         val con = Bot.db.datasource?.connection!!
@@ -28,8 +28,7 @@ object Prefix {
         }
 
         if (prefix.isEmpty()) {
-            prefix = Bot.config.default_prefix
-            setPrefix(event, prefix)
+            setPrefix(guildID)
         }
 
         con.close()
@@ -39,16 +38,12 @@ object Prefix {
 
 
     @Throws(SQLException::class)
-    fun setPrefix(event: GuildMessageReceivedEvent, prefix: String) {
+    fun setPrefix(guildID: String, prefix: String = Bot.config.default_prefix) {
         val con = Bot.db.get()
         val st: PreparedStatement = con.prepareStatement("UPDATE guilds SET prefix=? WHERE id=?")
         st.setString(1, prefix)
-        st.setString(2, event.guild.id)
+        st.setString(2, guildID)
         st.executeUpdate()
         con.commit()
-        val embed = Helper.createEmbed("Prefix Updated!")
-            .setDescription("New prefix: `$prefix`")
-        event.channel.sendMessage(embed.build()).queue()
-
     }
 }

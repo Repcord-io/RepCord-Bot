@@ -16,7 +16,7 @@ class Prefix : ListenerAdapter(){
 
     override fun onGuildMessageReceived(event: GuildMessageReceivedEvent) {
 
-        val currentPrefix = Prefix.getPrefix(event.guild.id, event)
+        val currentPrefix = Prefix.getPrefix(event.guild.id)
         val command = event.message.contentRaw.toLowerCase().split(" ")
 
         if (!event.message.member?.hasPermission(Permission.ADMINISTRATOR)!! || command.size != 2) {
@@ -26,6 +26,9 @@ class Prefix : ListenerAdapter(){
             Helper.queueEmbed(event, eb)
             return
         }
-        Prefix.setPrefix(event, command[1])
+        Prefix.setPrefix(event.guild.id, command[1])
+        val embed = Helper.createEmbed("Prefix Updated!")
+                .setDescription("New prefix: `${command[1]}`")
+        event.channel.sendMessage(embed.build()).queue()
     }
 }
