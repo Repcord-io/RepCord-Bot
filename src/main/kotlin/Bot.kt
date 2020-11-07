@@ -1,5 +1,6 @@
 import listeners.MessageReceived
 import com.google.gson.Gson
+import database.Database
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder
 import net.dv8tion.jda.api.utils.MemberCachePolicy
@@ -18,25 +19,28 @@ object Bot {
     val gson = Gson()
     val config = gson.fromJson(inputString, Config::class.java)
 
+    val db = Database(config.sql_host, config.sql_username, config.sql_password)
+
     @JvmStatic
     fun main(args: Array<String>) {
-
-        val gson = Gson()
-
-        println(config.token)
-
         val jda = DefaultShardManagerBuilder.createLight(config.token, GatewayIntent.GUILD_MESSAGES)
             .setMemberCachePolicy(MemberCachePolicy.NONE)
             .addEventListeners(MessageReceived())
             .build()
+
+        db.connect()
+
     }
 
     /*
      * Object to read bot_config.json
      */
     data class Config(
-        val token: String? = null,
-        val default_prefix: String? = null
+        val token: String = "",
+        val default_prefix: String = "",
+        val sql_username: String = "",
+        val sql_password: String = "",
+        val sql_host: String = ""
     )
 
 }
