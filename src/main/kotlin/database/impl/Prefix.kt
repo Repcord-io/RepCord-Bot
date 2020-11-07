@@ -46,5 +46,6 @@ object Prefix {
         st.setString(2, guildID)
         st.executeUpdate()
         con.commit()
+        con.close()
     }
 }
