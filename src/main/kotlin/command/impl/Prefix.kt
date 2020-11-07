@@ -16,8 +16,8 @@ class Prefix : ListenerAdapter(){
 
     override fun onGuildMessageReceived(event: GuildMessageReceivedEvent) {
 
-        var currentPrefix = Prefix.getPrefix(event.guild.id, event)
-        var command = event.message.contentRaw.toLowerCase().split(" ")
+        val currentPrefix = Prefix.getPrefix(event.guild.id, event)
+        val command = event.message.contentRaw.toLowerCase().split(" ")
 
         if (!event.message.member?.hasPermission(Permission.ADMINISTRATOR)!! || command.size != 2) {
             val eb = Helper.createEmbed("Server Prefix")
