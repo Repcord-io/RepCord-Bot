@@ -2,6 +2,7 @@ package database
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import java.sql.Connection
 
 
 /*
@@ -23,6 +24,10 @@ class Database(val host: String, val user: String, val password: String) {
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048")
         config.setDriverClassName("com.mysql.cj.jdbc.Driver")
         datasource = HikariDataSource(config)
+    }
+
+    fun get() : Connection {
+        return datasource!!.connection
     }
 
 }

@@ -15,11 +15,10 @@ import java.sql.SQLException
 object Prefix {
 
     @Throws(SQLException::class)
-    fun getPrefix(guildID: String?): String? {
+    fun getPrefix(guildID: String?, event: GuildMessageReceivedEvent): String? {
         var prefix = ""
-        Bot.db.datasource.use { ds ->
-            val con = ds?.connection!!
-            con.setAutoCommit(false)
+
+        Bot.db.get().let { con ->
             val st: PreparedStatement = con.prepareStatement("SELECT prefix FROM guilds WHERE id=?")
             st.setString(1, guildID)
             val rs = st.executeQuery()
@@ -30,7 +29,7 @@ object Prefix {
         }
         if (prefix.isEmpty()) {
             prefix = Bot.config.default_prefix
-            //TODO: Set guild's prefix to default
+            setPrefix(event, prefix)
         }
         return prefix
     }
@@ -38,9 +37,7 @@ object Prefix {
 
     @Throws(SQLException::class)
     fun setPrefix(event: GuildMessageReceivedEvent, prefix: String) {
-        Bot.db.datasource.use{ ds ->
-            val con = ds?.connection!!
-            con.autoCommit = false
+        Bot.db.get().let { con ->
             val st: PreparedStatement = con.prepareStatement("UPDATE guilds SET prefix=? WHERE id=?")
             st.setString(1, prefix)
             st.setString(2, event.guild.id)

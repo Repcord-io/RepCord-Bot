@@ -27,7 +27,7 @@ enum class Commands(val description: String, val adapter: ListenerAdapter) {
 
         fun isCommand(event: GuildMessageReceivedEvent) : Commands? {
             val message = event.message.contentRaw.toLowerCase()
-            val prefix = Bot.config.default_prefix
+            val prefix = database.impl.Prefix.getPrefix(event.guild.id)
             for (command in VALUES) {
                 if (message.startsWith(prefix + command.toLowerName())) {
                     return command
