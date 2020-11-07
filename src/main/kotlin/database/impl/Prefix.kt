@@ -1,9 +1,8 @@
 package database.impl
 
 import Bot
-import net.dv8tion.jda.api.EmbedBuilder
-import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
+import utils.Helper
 import java.sql.PreparedStatement
 import java.sql.SQLException
 
@@ -38,19 +37,18 @@ object Prefix {
 
 
     @Throws(SQLException::class)
-    fun setPrefix(e: GuildMessageReceivedEvent, prefix: String) {
+    fun setPrefix(event: GuildMessageReceivedEvent, prefix: String) {
         Bot.db.datasource.use{ ds ->
             val con = ds?.connection!!
             con.autoCommit = false
             val st: PreparedStatement = con.prepareStatement("UPDATE guilds SET prefix=? WHERE id=?")
             st.setString(1, prefix)
-            st.setString(2, e.guild.id)
+            st.setString(2, event.guild.id)
             st.executeUpdate()
             con.commit()
-            val eb = EmbedBuilder()
-                .setTitle("Prefix Updated!")
+            val embed = Helper.createEmbed("Prefix Updated!")
                 .setDescription("New prefix: `$prefix`")
-            e.channel.sendMessage(eb.build()).queue()
+            event.channel.sendMessage(embed.build()).queue()
         }
     }
 }
