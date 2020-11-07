@@ -1,7 +1,6 @@
 package command.impl
 
 import database.impl.Prefix
-import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
@@ -24,7 +23,7 @@ class Prefix : ListenerAdapter(){
             val eb = Helper.createEmbed("Server Prefix")
             eb.setDescription("Current prefix: $currentPrefix")
             eb.addField("Only Administrators can change the prefix", "Format: `${currentPrefix}prefix [New_Prefix]`", false)
-            event.channel.sendMessage(eb.build()).queue()
+            Helper.queueEmbed(event, eb)
             return
         }
         Prefix.setPrefix(event, command[1])

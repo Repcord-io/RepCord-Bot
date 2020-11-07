@@ -2,6 +2,7 @@ package command.impl
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
+import utils.Helper
 
 class Vote : ListenerAdapter() {
     override fun onGuildMessageReceived(event: GuildMessageReceivedEvent) {
@@ -12,6 +13,6 @@ class Vote : ListenerAdapter() {
             false
         )
         embed.addField("Discord Bot List:", "https://top.gg/bot/621182362008551444/vote", false)
-        event.channel.sendMessage(embed.build()).queue()
+        Helper.queueEmbed(event, embed)
     }
 }
