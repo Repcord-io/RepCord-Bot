@@ -5,4 +5,3 @@
   "sql_password": "pass",
   "sql_host": "jdbc:mysql://[IP_HERE]:[DB_PORT]/[DATABASE]?useUnicode=yes&characterEncoding=UTF-8"
 }
-}
