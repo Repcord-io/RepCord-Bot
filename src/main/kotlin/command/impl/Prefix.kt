@@ -16,7 +16,7 @@ class Prefix : ListenerAdapter(){
 
     override fun onGuildMessageReceived(event: GuildMessageReceivedEvent) {
 
-        val currentPrefix = Prefix.getPrefix(event.guild.id)
+        val currentPrefix = Prefix.getPrefix(event)
         val command = event.message.contentRaw.toLowerCase().split(" ")
 
         if (!event.message.member?.hasPermission(Permission.ADMINISTRATOR)!! || command.size != 2) {

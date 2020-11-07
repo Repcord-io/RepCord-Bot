@@ -15,12 +15,12 @@ import java.sql.SQLException
 object Prefix {
 
     @Throws(SQLException::class)
-    fun getPrefix(guildID: String): String? {
+    fun getPrefix(event: GuildMessageReceivedEvent): String? {
         var prefix = ""
 
         val con = Bot.db.datasource?.connection!!
         val st: PreparedStatement = con.prepareStatement("SELECT prefix FROM guilds WHERE id=?")
-        st.setString(1, guildID)
+        st.setString(1, event.guild.id)
         val rs = st.executeQuery()
         con.commit()
         if (rs.first()) {
@@ -28,7 +28,8 @@ object Prefix {
         }
 
         if (prefix.isEmpty()) {
-            setPrefix(guildID)
+            // This condition is normally only met if the bot got added to a guild while it was offline/disconnected from the websocket.
+            Guild.addGuild(event.guild)
         }
 
         con.close()
