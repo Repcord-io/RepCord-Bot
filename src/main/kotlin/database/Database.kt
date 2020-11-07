@@ -23,7 +23,9 @@ class Database(val host: String, val user: String, val password: String) {
         config.addDataSourceProperty("prepStmtCacheSize", "250")
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048")
         config.setDriverClassName("com.mysql.cj.jdbc.Driver")
+        config.isAutoCommit = false
         datasource = HikariDataSource(config)
+
     }
 
     fun get() : Connection {
