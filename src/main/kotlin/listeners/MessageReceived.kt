@@ -26,8 +26,22 @@ class MessageReceived : ListenerAdapter() {
             return
         }
 
+        /*
+         * Check if the message sent contains any strings containing
+         * command names in order to reduce SQL queries on every message.
+         */
+        if (!Commands.containsCommand(event)) {
+            return;
+        }
+
+        /*
+         * Check if the command in the string also starts with the prefix.
+         */
         val command = Commands.isCommand(event)
 
+        /*
+         * Return the command class corresponding to the command requested.
+         */
         command?.adapter?.onGuildMessageReceived(event)
 
     }

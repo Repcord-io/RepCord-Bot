@@ -35,6 +35,15 @@ enum class Commands(val description: String, val adapter: ListenerAdapter) {
             }
             return null
         }
+
+        fun containsCommand(event: GuildMessageReceivedEvent) : Boolean {
+            val message = event.message.contentRaw.toLowerCase()
+            for (command in VALUES) {
+                if (message.contains(command.toLowerName()))
+                    return true
+            }
+            return false
+        }
     }
 
     fun toLowerName() : String {
