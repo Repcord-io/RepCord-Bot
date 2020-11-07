@@ -1,6 +1,7 @@
 package command
 
 import command.impl.Help
+import command.impl.Prefix
 import command.impl.Rep
 import command.impl.Vote
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
@@ -14,9 +15,10 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter
  */
 enum class Commands(val description: String, val adapter: ListenerAdapter) {
 
-    HELP( "Lists available commands", Help()),
     REP( "Adds positive reputation to a user", Rep()),
-    VOTE("Provides details on how to vote.", Vote());
+    HELP( "Lists available commands", Help()),
+    VOTE("Provides details on how to vote.", Vote()),
+    PREFIX("Modifies the prefix the bot responds to", Prefix());
 
 
     companion object {

@@ -17,7 +17,6 @@ class MessageReceived : ListenerAdapter() {
 
     override fun onGuildMessageReceived(event: GuildMessageReceivedEvent) {
 
-
         /*
          * Check if the message was sent by a bot, or if we can talk in the channel.
          * Return if not.
@@ -29,7 +28,7 @@ class MessageReceived : ListenerAdapter() {
 
         val command = Commands.isCommand(event)
 
-        command?.adapter!!.onGuildMessageReceived(event)
+        command?.adapter?.onGuildMessageReceived(event)
 
     }
 }
