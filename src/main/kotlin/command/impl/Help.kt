@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter
  * @author Patrity - https://github.com/Patrity
  * Created on - 11/6/2020
  */
-class Help : ListenerAdapter(){
+class Help : ListenerAdapter() {
 
     override fun onGuildMessageReceived(event: GuildMessageReceivedEvent) {
         println("Help Received")

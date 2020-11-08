@@ -19,13 +19,10 @@ object Bot {
     val gson = Gson()
     val config = gson.fromJson(inputString, Config::class.java)
 
-    val db = Database(config.sql_host, config.sql_username, config.sql_password)
-
     @JvmStatic
     fun main(args: Array<String>) {
         run {
-            Database().connect()
-            db.connect()
+            Database.connect()
         }.also {
             val jda = DefaultShardManagerBuilder.createLight(config.token, GatewayIntent.GUILD_MESSAGES)
                 .setMemberCachePolicy(MemberCachePolicy.NONE)

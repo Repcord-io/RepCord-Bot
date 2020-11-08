@@ -10,15 +10,15 @@ import java.sql.Connection
  * @author Patrity - https://github.com/Patrity
  * Created on - 11/6/2020
  */
-class Database(val host: String, val user: String, val password: String) {
+object Database {
 
     var datasource: HikariDataSource? = null
 
     fun connect() {
         val config = HikariConfig()
-        config.jdbcUrl = host
-        config.username = user
-        config.password = password
+        config.jdbcUrl = Bot.config.sql_host
+        config.username = Bot.config.sql_username
+        config.password = Bot.config.sql_password
         config.addDataSourceProperty("cachePrepStmts", "true")
         config.addDataSourceProperty("prepStmtCacheSize", "250")
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048")
@@ -28,8 +28,9 @@ class Database(val host: String, val user: String, val password: String) {
 
     }
 
-    fun get() : Connection {
+    fun get(): Connection {
         return datasource!!.connection
     }
+
 
 }
