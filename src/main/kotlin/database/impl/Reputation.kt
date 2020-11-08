@@ -46,7 +46,6 @@ class Reputation {
     }
 
     fun getRep(user: String, target: String): Reputation? {
-        var reputation: Reputation? = null
         val con = Database.get()
         val st = con.prepareStatement("SELECT id, date_given, user, rep, comment, giver FROM user_reputation WHERE user = ? && giver = ?")
         st.setString(1, target)
@@ -54,16 +53,14 @@ class Reputation {
 
         val rs = st.executeQuery()
         if (rs.first()) {
-            reputation?.let {
-                reputation.id = rs.getInt("id")
-                reputation.comment = rs.getString("comment")
-                reputation.date = rs.getTimestamp("date_given")
-                reputation.user = rs.getString("user")
-                reputation.giver = rs.getString("giver")
-                reputation.rep = rs.getInt("rep")
-            }
+            return Reputation(rs.getInt("id"),
+                rs.getTimestamp("date_given"),
+                rs.getString("user"),
+                rs.getInt("rep"),
+                rs.getString("comment"),
+                rs.getString("giver"))
         }
-        return reputation
+        return null
     }
 
     fun modifyRep(user: String, target: String, positive: Boolean, comment: String) {
