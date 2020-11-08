@@ -11,14 +11,10 @@ class Vote : ListenerAdapter() {
         val lastVoted : String = database.impl.Vote.lastVoted(event.author.id);
 
         val embed = Helper.createEmbed("Vote")
-        embed.addField(
-            "Perks",
-            "By voting for us you gain an a rep power boost of +2 for 12 hours!\nThough remember to vote again once the 12 hours have passed to retain your boost.",
-            false
-        )
+        embed.setDescription("By voting for us you gain an a rep power boost of +2 for 12 hours! Though remember to vote again once the 12 hours have passed to retain your boost.")
+        embed.addField("Discord Bot List:", "https://top.gg/bot/621182362008551444/vote", false)
         embed.addField("Active", activeVote, true)
         embed.addField("Last Vote", lastVoted, true)
-        embed.addField("Discord Bot List:", "https://top.gg/bot/621182362008551444/vote", false)
         Helper.queueEmbed(event, embed)
     }
 }
