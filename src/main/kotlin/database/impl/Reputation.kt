@@ -173,10 +173,9 @@ object Reputation {
         return 0
     }
 
-    fun getTotalReputations(id: String): Int {
+    fun getTotalReputations(): Int {
         query({
             val st = it.prepareStatement("SELECT COUNT(*) as total FROM user_reputation;")
-            st.setString(1, id)
             val rs = st.executeQuery()
             it.commit()
             if (rs.first())

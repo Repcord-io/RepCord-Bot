@@ -5,20 +5,6 @@ import utils.query
 import java.sql.PreparedStatement
 
 object Info {
-    fun totalReps() : Int {
-        var total = 0;
-        val con = Database.get()
-        val st: PreparedStatement = con.prepareStatement("SELECT COUNT(*) as total FROM user_reputation;")
-        val rs = st.executeQuery()
-        con.commit()
-
-        if (rs.first()) {
-            total = rs.getInt("total")
-        }
-        con.close()
-        return total;
-    }
-
     fun totalActiveVotes() : Int {
         var total = 0
         val con = Database.get()

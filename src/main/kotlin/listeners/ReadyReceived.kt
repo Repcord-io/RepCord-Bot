@@ -2,6 +2,7 @@ package listeners
 
 import Bot
 import database.impl.Info
+import database.impl.Reputation
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.events.ReadyEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
@@ -19,7 +20,7 @@ class ReadyReceived : ListenerAdapter() {
                         applyActivity(event, "${Bot.config.default_prefix}help | ${event.jda.shardManager?.guilds?.size} servers")
                     }
                     2 -> {
-                        applyActivity(event, "${Bot.config.default_prefix}help | ${df.format(Info.totalReps())} reps")
+                        applyActivity(event, "${Bot.config.default_prefix}help | ${df.format(Reputation.getTotalReputations())} reps")
                     }
                     3 -> {
                         applyActivity(event, "${Bot.config.default_prefix}help | ${df.format(Info.totalActiveVotes())} active votes")

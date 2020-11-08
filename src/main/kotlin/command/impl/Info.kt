@@ -10,7 +10,7 @@ class Info : ListenerAdapter() {
         val df = DecimalFormat("#,###")
 
         val totalServers = event.jda.shardManager?.guilds?.size
-        val totalReps = database.impl.Info.totalReps()
+        val totalReps = database.impl.Reputation.getTotalReputations()
 
         val runtime = Runtime.getRuntime()
         val memory = runtime.totalMemory() - runtime.freeMemory()
