@@ -14,7 +14,7 @@ class Leaderboard : ListenerAdapter() {
         val results = Leaderboard.getResults();
         var index = 1
         for (result in results) {
-            embed.addField("(" + index++ + ") " + result.username, String.valueOf(result.rep), false)
+            embed.addField("(${index++}) " + result.username, String.valueOf(result.rep), false)
         }
         Helper.queueEmbed(event, embed)
     }
