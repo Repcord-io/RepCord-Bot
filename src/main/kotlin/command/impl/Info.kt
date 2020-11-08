@@ -21,11 +21,11 @@ class Info : ListenerAdapter() {
         embed.addField("Creation date", "September 11, 2019", false)
         embed.addField("Servers", df.format(totalServers), true)
         embed.addField("Total Reps", df.format(totalReps), true)
-        embed.addField("Registered Accounts", df.format(database.impl.Info.totalRegisteredUsers()), true)
         embed.addField("Current ping", "${event.jda.gatewayPing} ms", true)
+        embed.addField("Registered Users", df.format(database.impl.Info.totalRegisteredUsers()), true)
         embed.addField("Language", "Kotlin", true)
         embed.addField("Library", "JDA", true)
-        embed.addField("Ram usage", memoryUsed.toString(), true)
+        embed.addField("Ram usage", "$memoryUsed mb", true)
         embed.setThumbnail("https://repcord.io/logo.png")
         embed.addField(
             "Useful links",
