@@ -23,12 +23,16 @@ object Bot {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val jda = DefaultShardManagerBuilder.createLight(config.token, GatewayIntent.GUILD_MESSAGES)
-            .setMemberCachePolicy(MemberCachePolicy.NONE)
-            .addEventListeners(MessageReceived())
-            .build()
+        run {
+            Database().connect()
+            db.connect()
+        }.also {
+            val jda = DefaultShardManagerBuilder.createLight(config.token, GatewayIntent.GUILD_MESSAGES)
+                .setMemberCachePolicy(MemberCachePolicy.NONE)
+                .addEventListeners(MessageReceived())
+                .build()
+        }
 
-        db.connect()
 
     }
 
