@@ -6,12 +6,18 @@ import utils.Helper
 
 class Vote : ListenerAdapter() {
     override fun onGuildMessageReceived(event: GuildMessageReceivedEvent) {
-        val embed = utils.Helper.createEmbed("Vote")
+        var activeVote = "No";
+        if(database.impl.Vote.active(event.author.id)) activeVote = "Yes"
+        val lastVoted : String = database.impl.Vote.lastVoted(event.author.id);
+
+        val embed = Helper.createEmbed("Vote")
         embed.addField(
             "Perks",
             "By voting for us you gain an a rep power boost of +2 for 12 hours!\nThough remember to vote again once the 12 hours have passed to retain your boost.",
             false
         )
+        embed.addField("Active", activeVote, true)
+        embed.addField("Last Vote", lastVoted, true)
         embed.addField("Discord Bot List:", "https://top.gg/bot/621182362008551444/vote", false)
         Helper.queueEmbed(event, embed)
     }
