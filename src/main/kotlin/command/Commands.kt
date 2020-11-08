@@ -19,7 +19,8 @@ enum class Commands(val description: String, val adapter: ListenerAdapter) {
     LEADERBOARD("Returns Repcords leaderboard information.", Leaderboard()),
     INVITE("Invite link to invite RepCord to your server.", Invite()),
     DONATE("Provides donation link.", Donate()),
-    INFO("Displays stats about RepCord.", Info());
+    INFO("Displays stats about RepCord.", Info()),
+    CHECK("View basic overview about a user.", Check());
 
     companion object {
 
