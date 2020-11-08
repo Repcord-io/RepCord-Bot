@@ -1,6 +1,7 @@
 package database.impl
 
 import database.Database
+import utils.query
 import java.sql.PreparedStatement
 
 object Info {
@@ -30,5 +31,17 @@ object Info {
         }
         con.close()
         return total
+    }
+
+    fun totalRegisteredUsers() : Int {
+        query({
+            val st: PreparedStatement = it.prepareStatement("SELECT COUNT(*) as total FROM users;")
+            val rs = st.executeQuery()
+            it.commit()
+            if (rs.first()) {
+                return rs.getInt("total")
+            }
+        }, commit = false)
+        return 0
     }
 }

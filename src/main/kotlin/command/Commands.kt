@@ -18,7 +18,8 @@ enum class Commands(val description: String, val adapter: ListenerAdapter) {
     PREFIX("Modifies the prefix the bot responds to", Prefix()),
     LEADERBOARD("Returns Repcords leaderboard information.", Leaderboard()),
     INVITE("Invite link to invite RepCord to your server.", Invite()),
-    DONATE("Provides donation link.", Donate());
+    DONATE("Provides donation link.", Donate()),
+    INFO("Displays stats about RepCord.", Info());
 
     companion object {
 
