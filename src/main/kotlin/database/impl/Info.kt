@@ -6,17 +6,16 @@ import java.sql.PreparedStatement
 
 object Info {
     fun totalActiveVotes() : Int {
-        var total = 0
-        val con = Database.get()
-        val st: PreparedStatement = con.prepareStatement("SELECT COUNT(id) as active FROM votes WHERE updated_at > Date_sub(now(), INTERVAL 12 hour);")
-        val rs = st.executeQuery()
-        con.commit()
+        query({
+            val st: PreparedStatement = it.prepareStatement("SELECT COUNT(id) as active FROM votes WHERE updated_at > Date_sub(now(), INTERVAL 12 hour);")
+            val rs = st.executeQuery()
+            it.commit()
 
-        if (rs.first()) {
-            total = rs.getInt("active")
-        }
-        con.close()
-        return total
+            if (rs.first()) {
+                return rs.getInt("active")
+            }
+        })
+        return 0;
     }
 
     fun totalRegisteredUsers() : Int {
