@@ -17,7 +17,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter
 class MessageReceived : ListenerAdapter() {
 
     override fun onGuildMessageReceived(event: GuildMessageReceivedEvent) {
-
         /*
          * Check if the message was sent by a bot, or if we can talk in the channel.
          * Return if not.
@@ -38,7 +37,7 @@ class MessageReceived : ListenerAdapter() {
         /*
          * Check if the command in the string also starts with the prefix.
          */
-        val command = Commands.isCommand(event) ?: return
+        val command = Commands.isCommand(event)
 
         if(!event.guild.selfMember.hasPermission(event.channel, Permission.MESSAGE_EMBED_LINKS)) {
             event.channel.sendMessage("Missing required permissions, please give me permission to send `EMBED LINKS` in this channel.").queue()
@@ -48,6 +47,6 @@ class MessageReceived : ListenerAdapter() {
         /*
          * Return the command class corresponding to the command requested.
          */
-        command.adapter.onGuildMessageReceived(event)
+        command?.adapter?.onGuildMessageReceived(event)
     }
 }

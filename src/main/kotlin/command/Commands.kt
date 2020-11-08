@@ -29,7 +29,7 @@ enum class Commands(val description: String, val adapter: ListenerAdapter) {
             val message = event.message.contentRaw.toLowerCase()
             val prefix = database.impl.Prefix.getPrefix(event)
             for (command in VALUES) {
-                if (message.startsWith(prefix + command.toLowerName()) || message.startsWith("${Bot.config.default_prefix}help") && command.toLowerName() == "help") {
+                if (message.startsWith("$prefix${command.toLowerName()}") || message.startsWith("${Bot.config.default_prefix}help") && command.toLowerName() == "help") {
                     return command
                 }
             }
