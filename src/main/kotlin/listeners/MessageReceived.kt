@@ -27,11 +27,6 @@ class MessageReceived : ListenerAdapter() {
             return
         }
 
-        if(!event.guild.selfMember.hasPermission(event.channel, Permission.MESSAGE_EMBED_LINKS)) {
-            event.channel.sendMessage("Missing required permissions, please give me permission to send `EMBED LINKS` in this channel.").queue()
-            return
-        }
-
         /*
          * Check if the message sent contains any strings containing
          * command names in order to reduce SQL queries on every message.
@@ -45,10 +40,14 @@ class MessageReceived : ListenerAdapter() {
          */
         val command = Commands.isCommand(event)
 
+        if(!event.guild.selfMember.hasPermission(event.channel, Permission.MESSAGE_EMBED_LINKS)) {
+            event.channel.sendMessage("Missing required permissions, please give me permission to send `EMBED LINKS` in this channel.").queue()
+            return
+        }
+
         /*
          * Return the command class corresponding to the command requested.
          */
         command?.adapter?.onGuildMessageReceived(event)
-
     }
 }
