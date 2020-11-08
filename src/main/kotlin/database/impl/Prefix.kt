@@ -1,6 +1,7 @@
 package database.impl
 
 import Bot
+import database.Database
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
 import utils.Helper
 import java.sql.PreparedStatement
@@ -18,7 +19,7 @@ object Prefix {
     fun getPrefix(event: GuildMessageReceivedEvent): String? {
         var prefix = ""
 
-        val con = Bot.db.datasource?.connection!!
+        val con = Database.get()
         val st: PreparedStatement = con.prepareStatement("SELECT prefix FROM guilds WHERE id=?")
         st.setString(1, event.guild.id)
         val rs = st.executeQuery()
@@ -40,7 +41,7 @@ object Prefix {
 
     @Throws(SQLException::class)
     fun setPrefix(guildID: String, prefix: String = Bot.config.default_prefix) {
-        val con = Bot.db.get()
+        val con = Database.get()
         val st: PreparedStatement = con.prepareStatement("UPDATE guilds SET prefix=? WHERE id=?")
         st.setString(1, prefix)
         st.setString(2, guildID)

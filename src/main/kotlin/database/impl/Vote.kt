@@ -1,13 +1,14 @@
 package database.impl
 
 import Bot
+import database.Database
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 
 object Vote {
     fun active(id: String) : Boolean {
         var isActive = false
-        val con = Bot.db.get()
+        val con = Database.get()
         con.prepareStatement("SELECT UNIX_TIMESTAMP(updated_at) AS updated FROM votes WHERE user = ?")
         val st: PreparedStatement = con.prepareStatement("SELECT UNIX_TIMESTAMP(updated_at) AS updated FROM votes WHERE user = ?")
         st.setString(1, id)
@@ -24,7 +25,7 @@ object Vote {
 
     fun lastVoted(id: String) : String {
         var timestamp = "Never voted."
-        val con = Bot.db.get();
+        val con = Database.get()
         val st: PreparedStatement = con.prepareStatement("SELECT updated_at AS updated FROM votes WHERE user = ?")
         st.setString(1, id)
         val rs = st.executeQuery()

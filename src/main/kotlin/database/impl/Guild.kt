@@ -1,13 +1,14 @@
 package database.impl
 
 import Bot
+import database.Database
 import net.dv8tion.jda.api.entities.Guild
 import java.sql.SQLException
 
 object Guild {
     @Throws(SQLException::class)
     fun addGuild(guild: Guild) {
-        val con = Bot.db.get()
+        val con = Database.get()
         val st = con.prepareStatement("INSERT INTO guilds (`id`, `name`, `owner`, `members`, `prefix`) VALUES(?,?,?,?,?) ON DUPLICATE KEY UPDATE name = ?, owner = ?, members = ?;")
 
         st.setString(1, guild.id)
