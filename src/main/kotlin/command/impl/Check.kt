@@ -31,7 +31,7 @@ class Check : ListenerAdapter() {
                 return;
             }
             // TODO: Guild premium and normal premium should give donator badge
-            val donator: Boolean = database.impl.Donator.user(target.id)
+            val donator: Boolean = database.impl.Donator.isOverall(target.id)
             val userTitle: String = database.impl.User.getTitle(target.id)
             val userDescription: String = database.impl.User.getDescription(target.id)
             val activeVote: Boolean = database.impl.Vote.active(target.id)
