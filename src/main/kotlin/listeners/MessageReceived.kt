@@ -1,6 +1,7 @@
 package listeners
 
 import command.Commands
+import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 
@@ -23,6 +24,11 @@ class MessageReceived : ListenerAdapter() {
          */
 
         if (event.author.isBot || !event.channel.canTalk()) {
+            return
+        }
+
+        if(!event.guild.selfMember.hasPermission(event.channel, Permission.MESSAGE_EMBED_LINKS)) {
+            event.channel.sendMessage("Missing required permissions, please give me permission to send `EMBED LINKS` in this channel.").queue()
             return
         }
 
