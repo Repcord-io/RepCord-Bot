@@ -11,7 +11,7 @@ class Leaderboard : ListenerAdapter() {
     override fun onGuildMessageReceived(event: GuildMessageReceivedEvent) {
         val embed = Helper.createEmbed("Leaderboard")
         embed.setDescription("Displaying the top ten repped users across all servers using RepCord!")
-        val results = Leaderboard.get();
+        val results = Leaderboard.getResults();
         var index = 1
         for (result in results) {
             embed.addField("(" + index++ + ") " + result.username, String.valueOf(result.rep), false)

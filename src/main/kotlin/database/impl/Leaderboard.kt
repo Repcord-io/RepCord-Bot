@@ -4,7 +4,7 @@ import database.Database
 import java.sql.PreparedStatement
 
 object Leaderboard {
-    fun get(): MutableList<LeaderboardObject> {
+    fun getResults(): MutableList<LeaderboardObject> {
         val con = Database.get()
         val st: PreparedStatement = con.prepareStatement("SELECT SUM(rep) AS rep, user_cache.username FROM user_reputation, user_cache WHERE USER = user_cache.userid GROUP by userid ORDER BY SUM(rep) DESC LIMIT 10")
         val rs = st.executeQuery()
