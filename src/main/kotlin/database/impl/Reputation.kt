@@ -14,7 +14,7 @@ import kotlin.math.abs
  * @author Patrity - https://github.com/Patrity
  * Created on - 11/7/2020
  */
-class Reputation {
+object Reputation {
 
     fun rep(user: String, rep: Int, comment: String, giver: String, guild: String) {
         query({ con ->
