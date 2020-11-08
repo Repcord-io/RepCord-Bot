@@ -160,6 +160,7 @@ object Reputation {
         return 0
     }
 
+    // Total given reps a user has given another.
     fun getTotalGivenReps(id: String): Int {
         query({
             val st = it.prepareStatement("SELECT COUNT(rep) AS total FROM user_reputation WHERE giver = ?")
