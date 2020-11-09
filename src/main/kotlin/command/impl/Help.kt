@@ -20,7 +20,7 @@ class Help : ListenerAdapter() {
         embed.setDescription("RepCord is a cross-server reputation bot.\nKnow who your dealing with, before the first hello!")
         val prefix = Prefix.getPrefix(event)
         for(command in Commands.values()) {
-            embed.addField("${prefix}${command.toLowerName()}", command.description, false)
+            embed.addField("${prefix}${command.toLowerName()}", command.description, true)
         }
         Helper.queueEmbed(event, embed)
     }
