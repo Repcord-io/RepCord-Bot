@@ -3,7 +3,6 @@ package database.impl
 import database.Database
 import model.Reputation
 import utils.query
-import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.Timestamp
 import kotlin.math.abs
@@ -67,7 +66,7 @@ object Reputation {
     }
 
     fun modifyRep(user: String, target: String, positive: Boolean, comment: String) {
-        var reputation: Reputation? = getRep(user, target)
+        val reputation: Reputation? = getRep(user, target)
         reputation?.let {
             val newPoints: Int = if (positive) abs(reputation.rep) else -abs(reputation.rep)
             query({
@@ -83,7 +82,7 @@ object Reputation {
 
     fun repPower(id: String): Int {
         // TODO: proper vote/donator power getters
-        var power = 5
+        val power = 5
         return power
     }
 
@@ -188,6 +187,4 @@ object Reputation {
         //TODO
         return 0
     }
-
-
 }

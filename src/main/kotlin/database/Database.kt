@@ -1,5 +1,6 @@
 package database
 
+import Bot
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import java.sql.Connection

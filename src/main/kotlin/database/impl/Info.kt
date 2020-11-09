@@ -1,13 +1,13 @@
 package database.impl
 
-import database.Database
 import utils.query
 import java.sql.PreparedStatement
 
 object Info {
-    fun totalActiveVotes() : Int {
+    fun totalActiveVotes(): Int {
         query({
-            val st: PreparedStatement = it.prepareStatement("SELECT COUNT(id) as active FROM votes WHERE updated_at > Date_sub(now(), INTERVAL 12 hour);")
+            val st: PreparedStatement =
+                it.prepareStatement("SELECT COUNT(id) as active FROM votes WHERE updated_at > Date_sub(now(), INTERVAL 12 hour);")
             val rs = st.executeQuery()
             it.commit()
 
@@ -18,7 +18,7 @@ object Info {
         return 0;
     }
 
-    fun totalRegisteredUsers() : Int {
+    fun totalRegisteredUsers(): Int {
         query({
             val st: PreparedStatement = it.prepareStatement("SELECT COUNT(*) as total FROM users;")
             val rs = st.executeQuery()

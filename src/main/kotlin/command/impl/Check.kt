@@ -14,23 +14,23 @@ class Check : ListenerAdapter() {
 
             var target: User = event.author
             if (command.size > 1) {
-                target = if(event.message.mentionedUsers.isEmpty()) {
+                target = if (event.message.mentionedUsers.isEmpty()) {
                     try {
                         event.jda.retrieveUserById(command[1]).complete()
                     } catch (ignored: Exception) {
                         Helper.errorResponse(event, "Please mention a valid user.")
                         return
                     }
-                }else {
+                } else {
                     event.message.mentionedUsers[0]
                 }
             }
 
-            if(target.isBot) {
+            if (target.isBot) {
                 Helper.errorResponse(event, "Bots cannot be given reputation.")
                 return;
             }
-            // TODO: Guild premium and normal premium should give donator badge
+
             val donator: Boolean = database.impl.Donator.isOverall(target.id)
             val userTitle: String = database.impl.User.getTitle(target.id)
             val userDescription: String = database.impl.User.getDescription(target.id)
@@ -57,10 +57,10 @@ class Check : ListenerAdapter() {
             embed.addField("Rep Power", totalRepPower.toString(), true)
             embed.addField("Rank", rank.toString(), true)
             embed.addField("Total Given Reps", totalGivenReps.toString(), true)
-            embed.addField("Title", if(userTitle.isNotEmpty()) userTitle else "None", true)
+            embed.addField("Title", if (userTitle.isNotEmpty()) userTitle else "None", true)
             embed.addField("Donator", if (donator) "Yes" else "No", true)
-            embed.addField("Active Vote", if(activeVote) "Yes" else "No", true)
-            embed.addField("Description", if(userDescription.isNotEmpty()) userDescription else "None", true)
+            embed.addField("Active Vote", if (activeVote) "Yes" else "No", true)
+            embed.addField("Description", if (userDescription.isNotEmpty()) userDescription else "None", true)
 
 
             embed.addField("Profile", "To see more information about this user, visit https://repcord.io/user/${target.id}", false)

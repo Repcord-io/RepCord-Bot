@@ -1,6 +1,5 @@
 package command.impl
 
-import database.impl.Guild
 import database.impl.Prefix
 import database.impl.Reputation
 import net.dv8tion.jda.api.entities.User
@@ -8,7 +7,6 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import utils.Helper
 import utils.Helper.errorResponse
-import java.util.*
 
 /*
  * @project RepCord-Bot
@@ -16,11 +14,11 @@ import java.util.*
  * Created on - 11/6/2020
  */
 
-class Rep : ListenerAdapter(){
+class Rep : ListenerAdapter() {
 
     override fun onGuildMessageReceived(event: GuildMessageReceivedEvent) {
         run {
-             val command = event.message.contentRaw.split(" ")
+            val command = event.message.contentRaw.split(" ")
 
             if (command.size < 3) {
                 errorResponse(event, "Correct Syntax: `::rep @user [Brief Comment About User]`")

@@ -17,13 +17,13 @@ class ReadyReceived : ListenerAdapter() {
             override fun run() {
                 when ((1..3).random()) {
                     1 -> {
-                        applyActivity(event, "${Bot.config.default_prefix}help | ${event.jda.shardManager?.guilds?.size} servers")
+                        applyActivity(event,"${Bot.config.default_prefix}help | ${event.jda.shardManager?.guilds?.size} servers")
                     }
                     2 -> {
-                        applyActivity(event, "${Bot.config.default_prefix}help | ${df.format(Reputation.getTotalReputations())} reps")
+                        applyActivity(event,"${Bot.config.default_prefix}help | ${df.format(Reputation.getTotalReputations())} reps")
                     }
                     3 -> {
-                        applyActivity(event, "${Bot.config.default_prefix}help | ${df.format(Info.totalActiveVotes())} active votes")
+                        applyActivity(event,"${Bot.config.default_prefix}help | ${df.format(Info.totalActiveVotes())} active votes")
                     }
                 }
             }

@@ -39,7 +39,7 @@ class MessageReceived : ListenerAdapter() {
          */
         val command = Commands.isCommand(event) ?: return
 
-        if(!event.guild.selfMember.hasPermission(event.channel, Permission.MESSAGE_EMBED_LINKS)) {
+        if (!event.guild.selfMember.hasPermission(event.channel, Permission.MESSAGE_EMBED_LINKS)) {
             event.channel.sendMessage("Missing required permissions, please give me permission to send `EMBED LINKS` in this channel.").queue()
             return
         }
@@ -47,6 +47,6 @@ class MessageReceived : ListenerAdapter() {
         /*
          * Return the command class corresponding to the command requested.
          */
-        command?.adapter?.onGuildMessageReceived(event)
+        command.adapter.onGuildMessageReceived(event)
     }
 }

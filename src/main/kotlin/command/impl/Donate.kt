@@ -1,6 +1,5 @@
 package command.impl
 
-import database.impl.Prefix
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import utils.Helper

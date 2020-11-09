@@ -7,8 +7,8 @@ import utils.Helper
 class Vote : ListenerAdapter() {
     override fun onGuildMessageReceived(event: GuildMessageReceivedEvent) {
         var activeVote = "No";
-        if(database.impl.Vote.active(event.author.id)) activeVote = "Yes"
-        val lastVoted : String = database.impl.Vote.lastVoted(event.author.id);
+        if (database.impl.Vote.active(event.author.id)) activeVote = "Yes"
+        val lastVoted: String = database.impl.Vote.lastVoted(event.author.id);
 
         val embed = Helper.createEmbed("Vote")
         embed.setDescription("By voting for us you gain an a rep power boost of +2 for 12 hours! Though remember to vote again once the 12 hours have passed to retain your boost.")

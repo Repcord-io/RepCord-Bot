@@ -1,7 +1,6 @@
 package command.impl
 
 import command.Commands
-import database.impl.Guild
 import database.impl.Prefix
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
@@ -19,7 +18,7 @@ class Help : ListenerAdapter() {
         val embed = Helper.createEmbed("Help")
         embed.setDescription("RepCord is a cross-server reputation bot.\nKnow who your dealing with, before the first hello!")
         val prefix = Prefix.getPrefix(event)
-        for(command in Commands.values()) {
+        for (command in Commands.values()) {
             embed.addField("${prefix}${command.toLowerName()}", command.description, true)
         }
         Helper.queueEmbed(event, embed)

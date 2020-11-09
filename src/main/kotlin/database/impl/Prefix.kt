@@ -1,9 +1,7 @@
 package database.impl
 
 import Bot
-import database.Database
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
-import utils.Helper
 import utils.query
 import java.sql.PreparedStatement
 import java.sql.SQLException
@@ -19,7 +17,7 @@ object Prefix {
     @Throws(SQLException::class)
     fun getPrefix(event: GuildMessageReceivedEvent): String? {
         var prefix = ""
-        query({connection ->
+        query({ connection ->
             val st: PreparedStatement = connection.prepareStatement("SELECT prefix FROM guilds WHERE id=?")
             st.setString(1, event.guild.id)
             val rs = st.executeQuery()

@@ -1,6 +1,6 @@
-import listeners.MessageReceived
 import com.google.gson.Gson
 import database.Database
+import listeners.MessageReceived
 import listeners.ReadyReceived
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder
@@ -26,23 +26,21 @@ object Bot {
             Database.connect()
         }.also {
             val jda = DefaultShardManagerBuilder.createLight(config.token, GatewayIntent.GUILD_MESSAGES)
-                    .setMemberCachePolicy(MemberCachePolicy.NONE)
-                    .addEventListeners(MessageReceived(), ReadyReceived())
-                    .build()
+                .setMemberCachePolicy(MemberCachePolicy.NONE)
+                .addEventListeners(MessageReceived(), ReadyReceived())
+                .build()
         }
-
-
     }
 
     /*
      * Object to read bot_config.json
      */
     data class Config(
-            val token: String = "",
-            val default_prefix: String = "",
-            val sql_username: String = "",
-            val sql_password: String = "",
-            val sql_host: String = ""
+        val token: String = "",
+        val default_prefix: String = "",
+        val sql_username: String = "",
+        val sql_password: String = "",
+        val sql_host: String = ""
     )
 
 }

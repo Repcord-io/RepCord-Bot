@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
 import java.awt.Color
 
 object Helper {
-    fun createEmbed(title: String) : EmbedBuilder {
+    fun createEmbed(title: String): EmbedBuilder {
         val embed = EmbedBuilder()
         embed.setTitle(title)
         embed.setFooter("RepCord - https://repcord.io")
@@ -14,7 +14,7 @@ object Helper {
     }
 
     fun errorResponse(event: GuildMessageReceivedEvent, reason: String) {
-        var eb = createEmbed("Error")
+        val eb = createEmbed("Error")
         eb.setColor(Color.RED)
         eb.setDescription(reason)
         queueEmbed(event, eb)
@@ -24,7 +24,12 @@ object Helper {
         event.channel.sendMessage(embedBuilder.build()).queue();
     }
 
-    fun embed(event: GuildMessageReceivedEvent, title: String = "", send: Boolean = false, description: String = "") : EmbedBuilder {
+    fun embed(
+        event: GuildMessageReceivedEvent,
+        title: String = "",
+        send: Boolean = false,
+        description: String = ""
+    ): EmbedBuilder {
         val embed = EmbedBuilder()
         embed.setTitle(title)
         if (description.isNotBlank())

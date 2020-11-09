@@ -1,5 +1,6 @@
 package command
 
+import Bot
 import command.impl.*
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
@@ -12,8 +13,8 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter
  */
 enum class Commands(val description: String, val adapter: ListenerAdapter) {
 
-    REP( "Adds positive reputation to a user", Rep()),
-    HELP( "Lists available commands", Help()),
+    REP("Adds positive reputation to a user", Rep()),
+    HELP("Lists available commands", Help()),
     VOTE("Provides details on how to vote.", Vote()),
     PREFIX("Modifies the prefix the bot responds to", Prefix()),
     LEADERBOARD("Returns global leaderboard information.", Leaderboard()),
@@ -26,7 +27,7 @@ enum class Commands(val description: String, val adapter: ListenerAdapter) {
 
         private val VALUES = values();
 
-        fun isCommand(event: GuildMessageReceivedEvent) : Commands? {
+        fun isCommand(event: GuildMessageReceivedEvent): Commands? {
             val message = event.message.contentRaw.toLowerCase()
             val prefix = database.impl.Prefix.getPrefix(event)
             for (command in VALUES) {
@@ -37,7 +38,7 @@ enum class Commands(val description: String, val adapter: ListenerAdapter) {
             return null
         }
 
-        fun containsCommand(event: GuildMessageReceivedEvent) : Boolean {
+        fun containsCommand(event: GuildMessageReceivedEvent): Boolean {
             val message = event.message.contentRaw.toLowerCase()
             for (command in VALUES) {
                 if (message.contains(command.toLowerName()))
@@ -47,7 +48,7 @@ enum class Commands(val description: String, val adapter: ListenerAdapter) {
         }
     }
 
-    fun toLowerName() : String {
+    fun toLowerName(): String {
         return name.toLowerCase()
     }
 
