@@ -81,7 +81,8 @@ class Rep : ListenerAdapter() {
                 }
 
                 val amount = Reputation.repPower(event.author.id)
-                //TODO: User Cache
+                // Caches people who got repped.
+                database.impl.User.cacheUser(target)
                 Reputation.rep(target.id, amount, comment, event.author.id, event.guild.id)
 
                 val embed = Helper.embed(event, "User Repped!")
