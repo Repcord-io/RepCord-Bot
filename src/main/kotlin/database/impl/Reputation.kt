@@ -33,12 +33,11 @@ object Reputation {
 
     fun checkIfRepped(user: String, target: String): Boolean {
         query({
-            val con = Database.get()
-            val st = con.prepareStatement("SELECT COUNT(date_given) FROM user_reputation where giver=? AND user=?")
+            val st = it.prepareStatement("SELECT COUNT(date_given) FROM user_reputation where giver=? AND user=?")
             st.setString(1, user)
             st.setString(2, target)
             val rs = st.executeQuery()
-            con.commit()
+            it.commit()
             while (rs.next()) {
                 if (rs.getInt(1) != 0) {
                     return true
