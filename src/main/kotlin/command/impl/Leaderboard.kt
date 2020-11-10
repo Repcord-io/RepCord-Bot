@@ -13,7 +13,7 @@ class Leaderboard : ListenerAdapter() {
         val results = Leaderboard.getResults();
         var index = 1
         for (result in results) {
-            embed.addField("(${index++} ${result.username})", result.rep.toString(), false)
+            embed.addField("(${index++}) ${result.username}", result.rep.toString(), false)
         }
         Helper.queueEmbed(event, embed)
     }
