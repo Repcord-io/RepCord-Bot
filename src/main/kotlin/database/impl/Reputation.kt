@@ -1,11 +1,14 @@
 package database.impl
 
+import command.Ranks
 import database.Database
 import model.Reputation
 import utils.query
+import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.Timestamp
 import kotlin.math.abs
+import kotlin.math.roundToInt
 
 
 /*
@@ -53,12 +56,12 @@ object Reputation {
             val rs = st.executeQuery()
             if (rs.first()) {
                 return Reputation(
-                    rs.getInt("id"),
-                    rs.getTimestamp("date_given"),
-                    rs.getString("user"),
-                    rs.getInt("rep"),
-                    rs.getString("comment"),
-                    rs.getString("giver")
+                        rs.getInt("id"),
+                        rs.getTimestamp("date_given"),
+                        rs.getString("user"),
+                        rs.getInt("rep"),
+                        rs.getString("comment"),
+                        rs.getString("giver")
                 )
             }
         })
@@ -75,7 +78,7 @@ object Reputation {
                 st.setString(2, comment)
                 st.setString(3, target)
                 st.setString(4, user)
-                st.executeQuery()
+                st.executeUpdate()
             }, commit = true)
         }
     }
@@ -183,8 +186,35 @@ object Reputation {
         return 0
     }
 
-    fun getReputationCooldown(id: String): Long {
-        //TODO
+    fun getReputationCooldown(id: String): Int {
+        query({
+            val st: PreparedStatement = it.prepareStatement("SELECT id, UNIX_TIMESTAMP(date_given) AS date from user_reputation where giver= ? ORDER BY UNIX_TIMESTAMP(date_given) DESC LIMIT 1")
+            st.setString(1, id)
+            val rs = st.executeQuery()
+            it.commit()
+            if (rs.first()) {
+                val cooldown: Long?
+                val lastRepTime : Long = rs.getInt("date").toLong()
+                val systemTime: Long = System.currentTimeMillis() / 1000L
+                val isDonator: Boolean = Donator.user(id)
+                val remaining: Long = systemTime - lastRepTime
+
+                // Check if user is a donor
+                if(isDonator) {
+                    cooldown = Ranks.DONATOR.cooldown - remaining
+                    if(remaining > Ranks.DONATOR.cooldown) {
+                        return 0;
+                    }
+                    return (cooldown / 60).toFloat().roundToInt()
+                }
+
+                cooldown = Ranks.DEFAULT.cooldown - remaining
+                if(remaining > Ranks.DEFAULT.cooldown) {
+                    return 0;
+                }
+                return (cooldown / 60).toFloat().roundToInt()
+            }
+        })
         return 0
     }
 }

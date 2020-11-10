@@ -1,5 +1,6 @@
 package command.impl
 
+import database.impl.Donator
 import database.impl.Prefix
 import database.impl.Reputation
 import net.dv8tion.jda.api.entities.User
@@ -59,33 +60,34 @@ class Rep : ListenerAdapter() {
                     return
                 }
                 if (comment.length < 5) {
-                    errorResponse(event, "Your comment is too short. Please user at least 5 characters.")
+                    errorResponse(event, "Your comment is too short. Please use at least 5 characters.")
                     return
                 }
 
                 if (Reputation.checkIfRepped(event.author.id, target.id)) {
                     Reputation.modifyRep(event.author.id, target.id, true, comment)
 
-                    val embed = Helper.createEmbed("Reputation Modified!")
+                    val embed = Helper.createEmbed("Reputation Modified")
                     embed.setDescription("${event.author.asTag} repped ${target.asTag}")
                     embed.addField("Comment:", comment, false)
                     Helper.queueEmbed(event, embed)
                     return;
                 }
                 val cooldown = Reputation.getReputationCooldown(event.author.id)
-                if (cooldown > 0 /* &&  TODO: Donator Guild Check */) {
-                    val embed = Helper.createEmbed("Cooldown!")
+                if (cooldown > 0 && !Donator.guild(event.guild.id)) {
+                    val embed = Helper.createEmbed("Cooldown")
                     embed.setDescription("Please wait another $cooldown minutes before using ::rep again!")
-                    embed.setFooter("Donators are immune to cooldown!")
+                    embed.setFooter("Donators are immune to cooldown.")
                     Helper.queueEmbed(event, embed)
+                    return
                 }
 
                 val amount = Reputation.repPower(event.author.id)
-                // Caches people who got repped.
+                // Caches user who got repped.
                 database.impl.User.cacheUser(target)
                 Reputation.rep(target.id, amount, comment, event.author.id, event.guild.id)
 
-                val embed = Helper.embed(event, "User Repped!")
+                val embed = Helper.embed(event, "User Repped")
                 embed.setDescription("${event.author.asTag} repped ${target.asTag} for $amount points!")
                 embed.addField("Comment:", comment, false)
                 embed.setFooter("Enjoying RepCord? Vote for us and get a +2 rep power boost for 12 hours! - ${Prefix.getPrefix(event)}vote")
