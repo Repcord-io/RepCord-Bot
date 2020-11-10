@@ -83,8 +83,16 @@ object Reputation {
     }
 
     fun repPower(id: String): Int {
-        // TODO: proper vote/donator power getters
-        val power = 5
+        var power: Int = Ranks.DEFAULT.power
+        val isDonator: Boolean = Donator.user(id)
+        val isVoter: Boolean = Vote.active(id)
+
+        if(isDonator) {
+            power = Ranks.DONATOR.power
+        }
+
+        if(isVoter) power += 2
+
         return power
     }
 
