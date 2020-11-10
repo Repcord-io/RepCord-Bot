@@ -96,7 +96,7 @@ object Reputation {
             val rs = st.executeQuery()
             it.commit()
             if (rs.first())
-                return rs.getInt("score")
+                return rs.getInt(1)
         })
         return 0
     }
