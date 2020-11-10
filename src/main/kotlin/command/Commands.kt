@@ -2,6 +2,8 @@ package command
 
 import Bot
 import command.impl.*
+import database.impl.Guild
+import database.impl.User
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 
@@ -28,6 +30,8 @@ enum class Commands(val description: String, val adapter: ListenerAdapter) {
         private val VALUES = values();
 
         fun isCommand(event: GuildMessageReceivedEvent): Commands? {
+            User.cacheUser(event.author)
+            Guild.addGuild(event.guild)
             val message = event.message.contentRaw.toLowerCase()
             val prefix = database.impl.Prefix.getPrefix(event)
             for (command in VALUES) {
