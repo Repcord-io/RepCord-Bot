@@ -1,5 +1,6 @@
 import com.google.gson.Gson
 import database.Database
+import listeners.GuildEvents
 import listeners.MessageReceived
 import listeners.ReadyReceived
 import net.dv8tion.jda.api.requests.GatewayIntent
@@ -27,7 +28,7 @@ object Bot {
         }.also {
             val jda = DefaultShardManagerBuilder.createLight(config.token, GatewayIntent.GUILD_MESSAGES)
                 .setMemberCachePolicy(MemberCachePolicy.NONE)
-                .addEventListeners(MessageReceived(), ReadyReceived())
+                .addEventListeners(MessageReceived(), ReadyReceived(), GuildEvents())
                 .build()
         }
     }
@@ -40,7 +41,9 @@ object Bot {
         val default_prefix: String = "",
         val sql_username: String = "",
         val sql_password: String = "",
-        val sql_host: String = ""
+        val sql_host: String = "",
+        val repcord_guild: String = "",
+        val repcord_guild_new_servers: String = ""
     )
 
 }
