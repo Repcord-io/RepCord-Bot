@@ -15,20 +15,20 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter
  */
 enum class Commands(val description: String, val adapter: ListenerAdapter) {
 
-    REP("Adds positive reputation to a user", Rep()),
-    NEG("Adds negative reputation to a user", Neg()),
-    HELP("Lists available commands", Help()),
+    REP("Adds positive reputation to a user.", Rep()),
+    NEG("Adds negative reputation to a user.", Neg()),
+    CHECK("View basic overview about a user.", Check()),
     VOTE("Provides details on how to vote.", Vote()),
-    PREFIX("Modifies the prefix the bot responds to", Prefix()),
+    PREFIX("Modifies the prefix the bot responds to.", Prefix()),
     LEADERBOARD("Returns global leaderboard information.", Leaderboard()),
     INVITE("Invite link to invite RepCord to your server.", Invite()),
-    DONATE("Provides donation link.", Donate()),
     INFO("Displays stats about RepCord.", Info()),
-    CHECK("View basic overview about a user.", Check());
+    DONATE("Provides donation link.", Donate()),
+    HELP("Lists available commands.", Help());
 
     companion object {
 
-        private val VALUES = values();
+        private val VALUES = values()
 
         fun isCommand(event: GuildMessageReceivedEvent): Commands? {
             User.cacheUser(event.author)
