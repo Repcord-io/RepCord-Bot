@@ -1,6 +1,7 @@
 package command.impl
 
 import database.impl.Donator
+import database.impl.Guild
 import database.impl.Prefix
 import database.impl.Reputation
 import net.dv8tion.jda.api.entities.User
@@ -93,8 +94,7 @@ class Rep : ListenerAdapter() {
                 embed.setFooter("Enjoying RepCord? Vote for us and get a +2 rep power boost for 12 hours! - ${Prefix.getPrefix(event)}vote")
                 Helper.queueEmbed(event, embed)
 
-                //TODO: Impl auto kick/ban check
-
+                Guild.autoKickOrBan(event, target)
             }
 
 

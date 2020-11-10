@@ -13,6 +13,13 @@ object Helper {
         return embed
     }
 
+    fun successResponse(event: GuildMessageReceivedEvent, reason: String) {
+        val eb = createEmbed("Success")
+        eb.setColor(Color.decode("#5262a6"))
+        eb.setDescription(reason)
+        queueEmbed(event, eb)
+    }
+
     fun errorResponse(event: GuildMessageReceivedEvent, reason: String) {
         val eb = createEmbed("Error")
         eb.setColor(Color.RED)
