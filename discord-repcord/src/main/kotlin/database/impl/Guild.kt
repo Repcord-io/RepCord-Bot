@@ -65,7 +65,7 @@ object Guild {
             st.setString(1, id)
             val rs = st.executeQuery()
             it.commit()
-            if(rs.first()) return rs.getInt(1)
+            if(rs.next()) return rs.getInt(1)
         })
         return 0
     }
@@ -76,7 +76,7 @@ object Guild {
             st.setString(1, id)
             val rs = st.executeQuery()
             it.commit()
-            if(rs.first()) return rs.getInt(1)
+            if(rs.next()) return rs.getInt(1)
         })
         return 0
     }

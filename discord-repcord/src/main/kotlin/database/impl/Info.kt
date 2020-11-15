@@ -11,7 +11,7 @@ object Info {
             val rs = st.executeQuery()
             it.commit()
 
-            if (rs.first()) {
+            if(rs.next()) {
                 return rs.getInt("active")
             }
         })
@@ -23,7 +23,7 @@ object Info {
             val st: PreparedStatement = it.prepareStatement("SELECT COUNT(*) as total FROM users;")
             val rs = st.executeQuery()
             it.commit()
-            if (rs.first()) {
+            if (rs.next()) {
                 return rs.getInt("total")
             }
         }, commit = false)

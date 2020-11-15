@@ -5,7 +5,7 @@
           <img src="https://img.shields.io/discord/577124463368339480.svg?label=Discord&logo=Discord&colorB=7289da&style=for-the-badge" alt="Discord">
          </a>
          <a href="https://kotlinlang.org/">
-          <img src="https://img.shields.io/badge/MADE%20WITH-KOTLIN-blue?style=for-the-badge&logo=kotlin" alt="Langauge">
+          <img src="https://img.shields.io/badge/MADE%20WITH-KOTLIN-blue?style=for-the-badge&logo=kotlin" alt="Language">
          </a>
          <a href="https://github.com/Repcord-io/RepCord-Bot/blob/main/LICENSE">
           <img src="https://img.shields.io/badge/LICENCE-GPL--3.0-red?style=for-the-badge&logo=github" >

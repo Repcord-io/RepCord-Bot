@@ -23,7 +23,7 @@
 hs_err_pid*
 .gradle/*
 .idea/*
-build/*
+*/build/*
 gradle/*
 gradlew
 *.bat

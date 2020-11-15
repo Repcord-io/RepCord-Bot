@@ -1,6 +1,5 @@
 plugins {
-    id 'application'
-    id 'org.jetbrains.kotlin.jvm' version '1.3.72'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
 }
 
 group 'org.repcord'
@@ -8,25 +7,14 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    jcenter()
 }
-
-mainClassName = 'Bot'
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-}
-
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile group: 'com.zaxxer', name: 'HikariCP', version: '2.3.2'
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.17'
-    compile "org.slf4j:slf4j-simple:1.6.1"
-    compile('net.dv8tion:JDA:4.2.0_214') {
-        exclude module: 'opus-java'
-    }
-    implementation 'com.google.code.gson:gson:2.8.6'
+}
+
+subprojects {
+    apply plugin: 'org.jetbrains.kotlin.jvm'
+    sourceCompatibility = 11
+    targetCompatibility = 11
 }

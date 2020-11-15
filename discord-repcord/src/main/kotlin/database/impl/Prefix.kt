@@ -22,7 +22,7 @@ object Prefix {
             st.setString(1, event.guild.id)
             val rs = st.executeQuery()
             connection.commit()
-            if (rs.first()) {
+            if (rs.next()) {
                 prefix = rs.getString(1)
             }
             if (prefix.isEmpty()) {

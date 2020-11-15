@@ -1,0 +1,24 @@
+plugins {
+
+}
+
+group 'org.repcord'
+version '1.0-SNAPSHOT'
+
+repositories {
+	mavenCentral()
+	jcenter()
+}
+
+dependencies {
+	compile "io.ktor:ktor-server-core:1.4.0"
+	compile "io.ktor:ktor-server-netty:1.4.0"
+	implementation(project(':discord-repcord'))
+}
+
+compileKotlin {
+	kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+	kotlinOptions.jvmTarget = "1.8"
+}

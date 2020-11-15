@@ -3,7 +3,6 @@ package database.impl
 import net.dv8tion.jda.api.entities.User
 import utils.query
 import java.sql.PreparedStatement
-import java.util.*
 
 object User {
     fun getTitle(id: String): String {
@@ -13,7 +12,7 @@ object User {
             val rs = st.executeQuery()
             it.commit()
 
-            if (rs.first()) {
+            if (rs.next()) {
                 return rs.getString("title") ?: return ""
             }
         })
@@ -27,7 +26,7 @@ object User {
             val rs = st.executeQuery()
             it.commit()
 
-            if (rs.first()) {
+            if (rs.next()) {
                 return rs.getString("bio") ?: return ""
             }
         })

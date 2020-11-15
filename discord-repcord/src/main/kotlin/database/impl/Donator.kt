@@ -18,7 +18,7 @@ object Donator {
             st.setString(1, id)
             val rs = st.executeQuery()
             it.commit()
-            return rs.first()
+            return rs.next()
         })
         return false;
     }
@@ -30,7 +30,7 @@ object Donator {
             st.setString(1, id)
             val rs = st.executeQuery()
             it.commit()
-            return rs.first()
+            return rs.next()
         })
         return false;
     }
@@ -42,7 +42,7 @@ object Donator {
             st.setString(1, id)
             val rs = st.executeQuery()
             it.commit()
-            return rs.first()
+            return rs.next()
         })
         return false;
     }

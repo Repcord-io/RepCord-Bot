@@ -1,2 +1,3 @@
-rootProject.name = 'RepCord-Bot'
-
+rootProject.name = 'RepCord'
+include ':discord-repcord'
+include ':api-repcord'

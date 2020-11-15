@@ -22,7 +22,7 @@ object Bot {
     val config = gson.fromJson(inputString, Config::class.java)
 
     @JvmStatic
-    fun main(args: Array<String>) {
+    fun main(args: Array<String>?) {
         run {
             Database.connect()
         }.also {

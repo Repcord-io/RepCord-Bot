@@ -1,7 +1,6 @@
 package database.impl
 
 import command.Ranks
-import database.Database
 import model.Reputation
 import utils.query
 import java.sql.PreparedStatement
@@ -53,7 +52,7 @@ object Reputation {
             st.setString(1, target)
             st.setString(2, user)
             val rs = st.executeQuery()
-            if (rs.first()) {
+            if (rs.next()) {
                 return Reputation(
                         rs.getInt("id"),
                         rs.getTimestamp("date_given"),
@@ -102,7 +101,7 @@ object Reputation {
             st.setString(1, id)
             val rs = st.executeQuery()
             it.commit()
-            if (rs.first())
+            if (rs.next())
                 return rs.getInt(1)
         })
         return 0
@@ -114,7 +113,7 @@ object Reputation {
             st.setString(1, id)
             val rs = st.executeQuery()
             it.commit()
-            if (rs.first())
+            if (rs.next())
                 return rs.getInt("score")
         })
         return 0
@@ -127,7 +126,7 @@ object Reputation {
             st.setString(2, guild)
             val rs = st.executeQuery()
             it.commit()
-            if (rs.first())
+            if (rs.next())
                 return rs.getInt("score")
         })
         return 0
@@ -139,7 +138,7 @@ object Reputation {
             st.setString(1, id)
             val rs: ResultSet = st.executeQuery()
             it.commit()
-            if (rs.first())
+            if (rs.next())
                 return rs.getInt("total")
         })
         return 0
@@ -151,7 +150,7 @@ object Reputation {
             st.setString(1, id)
             val rs = st.executeQuery()
             it.commit()
-            if (rs.first())
+            if (rs.next())
                 return rs.getInt("rep")
         })
         return 0
@@ -163,7 +162,7 @@ object Reputation {
             st.setString(1, id)
             val rs = st.executeQuery()
             it.commit()
-            if (rs.first())
+            if (rs.next())
                 return rs.getInt("rep")
         })
         return 0
@@ -176,7 +175,7 @@ object Reputation {
             st.setString(1, id)
             val rs = st.executeQuery()
             it.commit()
-            if (rs.first())
+            if (rs.next())
                 return rs.getInt("total")
         })
         return 0
@@ -187,7 +186,7 @@ object Reputation {
             val st = it.prepareStatement("SELECT COUNT(*) as total FROM user_reputation;")
             val rs = st.executeQuery()
             it.commit()
-            if (rs.first())
+            if (rs.next())
                 return rs.getInt("total")
         })
         return 0
@@ -199,7 +198,7 @@ object Reputation {
             st.setString(1, id)
             val rs = st.executeQuery()
             it.commit()
-            if (rs.first()) {
+            if (rs.next()) {
                 val cooldown: Long?
                 val lastRepTime : Long = rs.getInt("date").toLong()
                 val systemTime: Long = System.currentTimeMillis() / 1000L

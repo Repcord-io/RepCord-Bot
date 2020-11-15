@@ -15,7 +15,7 @@ object Vote {
             st.setString(1, id)
             val rs: ResultSet = st.executeQuery()
             it.commit()
-            if (rs.first()) {
+            if (rs.next()) {
                 val voteTime: Int = rs.getInt(1)
                 val systemTime: Long = System.currentTimeMillis() / 1000L
                 isActive = (systemTime - voteTime < 43200)
@@ -31,7 +31,7 @@ object Vote {
             st.setString(1, id)
             val rs = st.executeQuery()
             it.commit()
-            if (rs.first()) {
+            if (rs.next()) {
                 timestamp = rs.getString(1)
             }
         })
