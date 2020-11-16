@@ -1,24 +1,37 @@
-plugins {
+buildscript {
+	ext.ktor_version = '1.4.2'
+	ext.logback_version = '1.2.3'
+	repositories {
+		jcenter()
+	}
 
 }
 
+apply plugin: 'kotlin'
+apply plugin: 'application'
+
 group 'org.repcord'
-version '1.0-SNAPSHOT'
+version '0.0.1'
 
 repositories {
-	mavenCentral()
+	mavenLocal()
 	jcenter()
 }
 
-dependencies {
-	compile "io.ktor:ktor-server-core:1.4.0"
-	compile "io.ktor:ktor-server-netty:1.4.0"
-	implementation(project(':discord-repcord'))
-}
-
+sourceCompatibility = 1.8
 compileKotlin {
-	kotlinOptions.jvmTarget = "1.8"
+	kotlinOptions.jvmTarget = "11"
 }
 compileTestKotlin {
-	kotlinOptions.jvmTarget = "1.8"
+	kotlinOptions.jvmTarget = "11"
+}
+
+dependencies {
+	implementation(project(':discord-repcord'))
+	implementation "io.ktor:ktor-server-netty:$ktor_version"
+	implementation "ch.qos.logback:logback-classic:$logback_version"
+	implementation "io.ktor:ktor-server-core:$ktor_version"
+	implementation "io.ktor:ktor-auth:$ktor_version"
+	implementation "io.ktor:ktor-auth-jwt:$ktor_version"
+	implementation "io.ktor:ktor-gson:$ktor_version"
 }
