@@ -13,8 +13,7 @@ object User {
                return UserModal(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4))
             }
         })
-        // User doesn't exist if null
-        return null;
+        return null
     }
 }
 
