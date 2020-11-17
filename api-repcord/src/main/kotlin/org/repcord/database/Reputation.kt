@@ -37,5 +37,4 @@ data class ReputationModal(
     val avatar: String?,
     val score: Int, // Score/power added to rep.
     val comment: String
-){
-}
+)

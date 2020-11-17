@@ -27,5 +27,4 @@ data class UserModal(
     var totalReps: Int? = 0,
     var donator: Boolean? = false,
     var description: String? = ""
-    ){
-}
+)
