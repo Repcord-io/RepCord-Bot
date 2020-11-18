@@ -43,7 +43,9 @@ object Bot {
             val sql_password: String = "",
             val sql_host: String = "",
             val host_guild: String = "",
-            val host_guild_new_servers: String = ""
+            val host_guild_new_servers: String = "",
+            val domain: String = "",
+            val jwt_token: String = ""
     )
 
 }

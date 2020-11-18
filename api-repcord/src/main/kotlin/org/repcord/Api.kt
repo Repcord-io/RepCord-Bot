@@ -1,7 +1,6 @@
 package org.repcord
 
 import io.ktor.application.*
-import io.ktor.response.*
 import io.ktor.request.*
 import io.ktor.features.*
 import org.slf4j.event.*
@@ -11,6 +10,7 @@ import io.ktor.auth.*
 import io.ktor.gson.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import org.repcord.routes.userAuthentication
 import org.repcord.routes.userRoutes
 
 fun main() {
@@ -42,6 +42,7 @@ fun Application.module() {
     }
 
     routing {
+        userAuthentication()
         route("/user") {
             userRoutes()
         }
