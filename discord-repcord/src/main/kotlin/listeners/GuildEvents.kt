@@ -14,7 +14,7 @@ class GuildEvents : ListenerAdapter() {
             val embed = Helper.createEmbed(guild.name)
             embed.addField("Owner", guild.retrieveOwner().complete().user.asTag, false)
             embed.setThumbnail(guild.iconUrl)
-            event.jda.getGuildById(Bot.config.repcord_guild)?.getTextChannelById(Bot.config.repcord_guild_new_servers)?.sendMessage(embed.build())?.queue()
+            event.jda.getGuildById(Bot.config.host_guild)?.getTextChannelById(Bot.config.host_guild_new_servers)?.sendMessage(embed.build())?.queue()
         }
     }
 }

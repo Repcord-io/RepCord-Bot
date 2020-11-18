@@ -4,6 +4,6 @@
   "sql_username": "user",
   "sql_password": "pass",
   "sql_host": "jdbc:mysql://[IP_HERE]:[DB_PORT]/[DATABASE]?useUnicode=yes&characterEncoding=UTF-8",
-  "repcord_guild": "[Guild id]",
-  "repcord_guild_new_servers": "[New servers channel id]"
+  "host_guild": "[Guild id]",
+  "host_guild_new_servers": "[New servers channel id]"
 }

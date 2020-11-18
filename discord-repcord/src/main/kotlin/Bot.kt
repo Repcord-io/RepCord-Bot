@@ -37,13 +37,13 @@ object Bot {
      * Object to read bot_config.json
      */
     data class Config(
-        val token: String = "",
-        val default_prefix: String = "",
-        val sql_username: String = "",
-        val sql_password: String = "",
-        val sql_host: String = "",
-        val repcord_guild: String = "",
-        val repcord_guild_new_servers: String = ""
+            val token: String = "",
+            val default_prefix: String = "",
+            val sql_username: String = "",
+            val sql_password: String = "",
+            val sql_host: String = "",
+            val host_guild: String = "",
+            val host_guild_new_servers: String = ""
     )
 
 }
