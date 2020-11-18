@@ -11,8 +11,8 @@ import org.repcord.database.User
 import org.repcord.database.UserModal
 
 fun Route.userRoutes(){
-    route("/user/{id}") {
-        get() {
+    route("/{id}") {
+        get {
             val id: String? = call.parameters["id"]
 
             val user: UserModal = User.doesExist(id) ?: return@get call.respond(HttpStatusCode.NotFound, "Doesn't exist.");
@@ -25,8 +25,8 @@ fun Route.userRoutes(){
         }
     }
 
-    route("/user/{id}/reputations") {
-        get() {
+    route("/{id}/reputations") {
+        get {
             val id: String? = call.parameters["id"]
             val reputations : MutableList<ReputationModal> = org.repcord.database.Reputation.getUsersRep(id)
             call.respond(reputations)

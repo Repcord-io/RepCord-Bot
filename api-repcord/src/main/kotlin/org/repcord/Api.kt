@@ -42,7 +42,9 @@ fun Application.module() {
     }
 
     routing {
-        userRoutes()
+        route("/user") {
+            userRoutes()
+        }
     }
 }
 
