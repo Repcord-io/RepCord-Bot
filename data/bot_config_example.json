@@ -5,5 +5,7 @@
   "sql_password": "pass",
   "sql_host": "jdbc:mysql://[IP_HERE]:[DB_PORT]/[DATABASE]?useUnicode=yes&characterEncoding=UTF-8",
   "host_guild": "[Guild id]",
-  "host_guild_new_servers": "[New servers channel id]"
+  "host_guild_new_servers": "[New servers channel id]",
+  "domain": "http://localhost:8080",
+  "jwt_token": "[Secure token]"
 }
