@@ -9,7 +9,7 @@ object Reputation {
         // Get users rep verbose :ReputationModal
         val reputations = mutableListOf<ReputationModal>()
         query({
-            val st: PreparedStatement = it.prepareStatement("SELECT date_given, user_cache.username, user_cache.avatar, rep, comment FROM user_reputation INNER JOIN user_cache ON user_reputation.giver = user_cache.userid WHERE user_reputation.user = ?")
+            val st: PreparedStatement = it.prepareStatement("SELECT date_given, user_cache.username, user_cache.avatar, rep, comment, reply FROM user_reputation INNER JOIN user_cache ON user_reputation.giver = user_cache.userid WHERE user_reputation.user = ?")
             st.setString(1, id)
             val rs = st.executeQuery()
             it.commit()
@@ -20,7 +20,8 @@ object Reputation {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getInt(4),
-                        rs.getString(5)
+                        rs.getString(5),
+                        rs.getString(6)
                     )
                 )
             }
@@ -36,5 +37,6 @@ data class ReputationModal(
     val user: String, // User who gave the reputation.
     val avatar: String?,
     val score: Int, // Score/power added to rep.
-    val comment: String
+    val comment: String,
+    val reply: String? // Reply from user who got repped.
 )
